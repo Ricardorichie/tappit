@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { ThemeProvider } from "styled-components";
+import { Routes, Route, Navigate } from "react-router";
+import { darkTheme, GlobalStyle, lightTheme } from "./theme/theme";
+
+import "antd/dist/antd.css";
+import AppLayout from "./components/layout/AppLayout";
+import Home from "./Views/Home";
+import Update from "./Views/Update";
+import Error from "./Views/Error";
 
 function App() {
+  //in later versions a light mode functionality could be added
+  const [lightMode, setLightMode] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={lightMode ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/person/:id" element={<Update />} />
+          <Route path="*" element={<Navigate to="/error" />} />
+          <Route path="/error" element={<Error />} />
+        </Routes>
+      </AppLayout>
+    </ThemeProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Tappit Test",
+  "name": "Solution to Tappit Frontend Technical Test",
   "icons": [
     {
       "src": "favicon.ico",
